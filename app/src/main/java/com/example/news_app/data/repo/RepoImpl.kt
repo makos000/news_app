@@ -1,46 +1,37 @@
 package com.example.news_app.data.repo
 
-import com.example.news_app.api.ApiInterface
-import com.example.news_app.data.room.NewsDao
-import com.example.news_app.data.room.NewsEntity
-import com.example.news_app.domain.model.NewsModel
+import com.example.news_app.data.local.NewsDao
+import com.example.news_app.data.local.NewsEntity
+import com.example.news_app.data.remote.RemoteDataSourceInterface
 import com.example.news_app.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
-class RepoImpl @Inject constructor(val apiInterface: ApiInterface, val newsDao: NewsDao): RepoInterface {
+class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val local: NewsDao): RepoInterface {
     override suspend fun getNews(category : String): Flow<Resource<List<NewsEntity>>> = flow {
-        try {
-            emit(Resource.Loading())
-            val response = apiInterface.getNews(category)
-            if (response.isSuccessful){
-                insertNewsToDB(NewsEntity(response.body()!!))
-                readNewsToDB().collect(){
-                    emit(Resource.Success(it))
-                }
+        emit(Resource.Loading())
+        val response = remote.getNews(category)
+        if (response is Resource.Success){
+            insertNewsToDB(NewsEntity(response.data!!))
+            readNewsToDB().collect(){
+                emit(Resource.Success(it))
             }
-            else{
-                emit(Resource.Error(response.message()))
-            }
-        } catch (e: HttpException){
-            emit(Resource.Error("Could not load"))
-        } catch (e: IOException){
-            emit(Resource.Error("Internet connection issue"))
+        }
+        else {
+            emit(Resource.Error(response.message!!))
         }
     }
 
     override fun insertNewsToDB(newsEntity: NewsEntity) {
-        return newsDao.insertNewsToDB(newsEntity)
+        return local.insertNewsToDB(newsEntity)
     }
 
     override fun readNewsToDB(): Flow<List<NewsEntity>> {
-        return newsDao.readNewsFromDB()
+        return local.readNewsFromDB()
     }
 
     override fun nukeTable() {
-        return newsDao.nukeTable()
+        return local.nukeTable()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.news_app.api
+package com.example.news_app.data.remote.api
 
 import com.example.news_app.domain.model.NewsModel
 import retrofit2.Response

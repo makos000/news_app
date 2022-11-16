@@ -1,4 +1,4 @@
-package com.example.news_app.api
+package com.example.news_app.data.remote.api
 
 object ApiRes {
     //https://inshorts.deta.dev/news?category={category_name}

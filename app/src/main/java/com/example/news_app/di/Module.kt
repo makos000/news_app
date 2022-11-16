@@ -2,12 +2,12 @@ package com.example.news_app.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.news_app.api.ApiInterface
-import com.example.news_app.api.ApiRes
+import com.example.news_app.data.remote.api.ApiInterface
+import com.example.news_app.data.remote.api.ApiRes
 import com.example.news_app.data.repo.RepoImpl
 import com.example.news_app.data.repo.RepoInterface
-import com.example.news_app.data.room.NewsDao
-import com.example.news_app.data.room.NewsDatabase
+import com.example.news_app.data.local.NewsDao
+import com.example.news_app.data.local.NewsDatabase
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -18,7 +18,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 @Module
@@ -74,6 +73,5 @@ class Module {
 
     @Provides
     fun provideDao(database: NewsDatabase) = database.newsDao()
-
 
 }
