@@ -12,8 +12,8 @@ class RoomConverter {
     fun newsToString(newsModel: NewsModel): String = gson.toJson(newsModel)
 
     @TypeConverter
-    fun stringToNews(data: String): NewsModel{
-        val listType = object : TypeToken<NewsEntity>() {}.type
+    fun stringToNews(data: String): NewsModel {
+        val listType = object : TypeToken<NewsModel>() {}.type
         return gson.fromJson(data, listType)
     }
 }

@@ -10,6 +10,7 @@ import androidx.room.TypeConverters
     exportSchema = false
 )
 
+
 @TypeConverters(RoomConverter::class)
 abstract class NewsDatabase: RoomDatabase() {
     abstract fun newsDao(): NewsDao

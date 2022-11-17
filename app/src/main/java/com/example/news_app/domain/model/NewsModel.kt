@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class NewsModel(
     @SerializedName("category")
-    val category: String,
+    val category: String = "",
     @SerializedName("data")
-    val `data`: List<Data>,
+    val `data`: List<Data> = listOf(),
     @SerializedName("success")
-    val success: Boolean
+    val success: Boolean = false
 )

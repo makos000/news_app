@@ -1,4 +1,4 @@
-package com.example.news_app.di
+package com.example.news_app.data.di
 
 import android.content.Context
 import androidx.room.Room
@@ -8,6 +8,8 @@ import com.example.news_app.data.repo.RepoImpl
 import com.example.news_app.data.repo.RepoInterface
 import com.example.news_app.data.local.NewsDao
 import com.example.news_app.data.local.NewsDatabase
+import com.example.news_app.data.remote.RemoteDataSourceImpl
+import com.example.news_app.data.remote.RemoteDataSourceInterface
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -58,8 +60,13 @@ class Module {
     }
 
     @Provides
-    fun getRepo(apiInterface: ApiInterface, newsDao: NewsDao): RepoInterface {
-        return RepoImpl(apiInterface, newsDao)
+    fun getRemoteDS(apiInterface: ApiInterface): RemoteDataSourceImpl {
+        return RemoteDataSourceImpl(apiInterface)
+    }
+
+    @Provides
+    fun getRepo(remote: RemoteDataSourceImpl, local: NewsDao): RepoInterface {
+        return RepoImpl(remote, local)
     }
 
     @Provides
