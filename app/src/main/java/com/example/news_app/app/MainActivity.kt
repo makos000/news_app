@@ -43,7 +43,6 @@ class MainActivity : ComponentActivity() {
         }
     }
     @SuppressLint("UnrememberedMutableState")
-    @OptIn(ExperimentalAnimationApi::class, ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
     @Composable
     fun NewsApp() {
         var showNewsScreen by rememberSaveable { mutableStateOf(viewModel.newsScreen) }
