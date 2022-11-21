@@ -15,7 +15,6 @@ interface RepoInterface {
 
     fun nukeTable()
     suspend fun fetchDataFromRemote(
-        remote: RemoteDataSourceInterface,
         category: String
     ): Resource<NewsModel>
 }

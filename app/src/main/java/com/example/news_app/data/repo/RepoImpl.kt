@@ -1,5 +1,6 @@
 package com.example.news_app.data.repo
 
+import com.example.news_app.data.local.LocalDataSource
 import com.example.news_app.data.local.NewsDao
 import com.example.news_app.data.local.NewsEntity
 import com.example.news_app.data.remote.RemoteDataSourceImpl
@@ -10,13 +11,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val local: NewsDao) :
+class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val local: LocalDataSource) :
     RepoInterface {
     override suspend fun getNews(category: String): Flow<Resource<List<NewsEntity>>> = flow {
         emit(Resource.Loading())
         readNewsFromDB().collect() { lists ->
             if (lists.isEmpty()) {
-                val response = fetchDataFromRemote(remote, category)
+                val response = fetchDataFromRemote(category)
                 if (response is Resource.Success) {
                     nukeTable()
                     insertNewsToDB(NewsEntity(response.data!!))
@@ -44,6 +45,6 @@ class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val lo
         return local.nukeTable()
     }
 
-    override suspend fun fetchDataFromRemote(remote: RemoteDataSourceInterface, category: String) =
+    override suspend fun fetchDataFromRemote(category: String) =
         remote.getNews(category)
 }

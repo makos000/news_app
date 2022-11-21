@@ -2,6 +2,8 @@ package com.example.news_app.data.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.news_app.data.local.LocalDataSource
+import com.example.news_app.data.local.LocalDataSourceImpl
 import com.example.news_app.data.remote.api.ApiInterface
 import com.example.news_app.data.remote.api.ApiRes
 import com.example.news_app.data.repo.RepoImpl
@@ -63,9 +65,13 @@ class Module {
     fun getRemoteDS(apiInterface: ApiInterface): RemoteDataSourceInterface {
         return RemoteDataSourceImpl(apiInterface)
     }
+    @Provides
+    fun getLocalDS(dao: NewsDao): LocalDataSource {
+        return LocalDataSourceImpl(dao)
+    }
 
     @Provides
-    fun getRepo(remote: RemoteDataSourceImpl, local: NewsDao): RepoInterface {
+    fun getRepo(remote: RemoteDataSourceInterface, local: LocalDataSource): RepoInterface {
         return RepoImpl(remote, local)
     }
 
