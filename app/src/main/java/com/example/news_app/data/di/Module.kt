@@ -60,7 +60,7 @@ class Module {
     }
 
     @Provides
-    fun getRemoteDS(apiInterface: ApiInterface): RemoteDataSourceInterface {
+    fun getRemoteDS(apiInterface: ApiInterface): RemoteDataSourceImpl {
         return RemoteDataSourceImpl(apiInterface)
     }
 
