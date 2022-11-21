@@ -9,7 +9,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE )
-    fun insertNewsToDB(newsEntity: NewsEntity)
+    fun insertNewsToDB(newsEntity: List<NewsEntity>)
+    //  fun insertNewsToDB(newsEntity: NewsEntity)
 
     @Query("SELECT * FROM news_table order by `index` DESC")
     fun readNewsFromDB(): Flow<List<NewsEntity>>

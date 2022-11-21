@@ -6,11 +6,11 @@ import androidx.room.TypeConverters
 
 @Database(
     entities = [NewsEntity::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 
-
+//todo:this convertor is not necessary
 @TypeConverters(RoomConverter::class)
 abstract class NewsDatabase: RoomDatabase() {
     abstract fun newsDao(): NewsDao

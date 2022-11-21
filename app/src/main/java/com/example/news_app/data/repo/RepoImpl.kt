@@ -1,17 +1,18 @@
 package com.example.news_app.data.repo
 
 import com.example.news_app.data.local.LocalDataSource
-import com.example.news_app.data.local.NewsDao
 import com.example.news_app.data.local.NewsEntity
-import com.example.news_app.data.remote.RemoteDataSourceImpl
 import com.example.news_app.data.remote.RemoteDataSourceInterface
-import com.example.news_app.domain.model.NewsModel
+import com.example.news_app.domain.model.toNewsEntity
 import com.example.news_app.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val local: LocalDataSource) :
+class RepoImpl @Inject constructor(
+    val remote: RemoteDataSourceInterface,
+    val local: LocalDataSource
+) :
     RepoInterface {
     override suspend fun getNews(category: String): Flow<Resource<List<NewsEntity>>> = flow {
         emit(Resource.Loading())
@@ -20,7 +21,9 @@ class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val lo
                 val response = fetchDataFromRemote(category)
                 if (response is Resource.Success) {
                     nukeTable()
-                    insertNewsToDB(NewsEntity(response.data!!))
+                    insertNewsToDB(response.data!!.map { it.toNewsEntity() })
+                    // insertNewsToDB(NewsEntity(response.data!!))
+
                     readNewsFromDB().collect() {
                         emit(Resource.Success(it))
                     }
@@ -33,7 +36,7 @@ class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val lo
         }
     }
 
-    override fun insertNewsToDB(newsEntity: NewsEntity) {
+    override fun insertNewsToDB(newsEntity: List<NewsEntity>) {
         return local.insertNewsToDB(newsEntity)
     }
 

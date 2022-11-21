@@ -7,7 +7,7 @@ class LocalDataSourceImpl @Inject constructor(
     private val dao: NewsDao
 ):LocalDataSource
 {
-    override fun insertNewsToDB(newsEntity: NewsEntity) {
+    override fun insertNewsToDB(newsEntity: List<NewsEntity>) {
         return dao.insertNewsToDB(newsEntity)
     }
 

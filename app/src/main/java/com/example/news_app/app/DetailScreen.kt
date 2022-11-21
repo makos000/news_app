@@ -30,6 +30,7 @@ fun DetailScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
         Modifier
             .fillMaxSize()
             .padding(40.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = viewModel.article.content)
+        Text(text = viewModel.article.content!!)
+        // Text(text = viewModel.article.content)
     }
 }

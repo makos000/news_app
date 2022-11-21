@@ -7,7 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
 
-    fun insertNewsToDB(newsEntity: NewsEntity)
+    fun insertNewsToDB(newsEntity: List<NewsEntity>)
+    // fun insertNewsToDB(newsEntity: NewsEntity)
 
     fun readNewsFromDB(): Flow<List<NewsEntity>>
 

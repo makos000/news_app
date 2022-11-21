@@ -34,7 +34,10 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
                 itemsIndexed(items = list){
                     index, item ->
                     Card(onClick = {onClicked.invoke()
-                        viewModel.article = item.newsModel.data[index]
+
+                        viewModel.article = list.map { it.toDataModel()}[index]
+                       // viewModel.article = list.map { it.toData()}[index]
+                        //viewModel.article = item.newsModel.data[index]
                     },
                         modifier = Modifier
                         .fillMaxWidth()
@@ -43,7 +46,8 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
                         shape = RoundedCornerShape(20.dp)
                     ) {
                         Column(modifier = Modifier.padding(10.dp)) {
-                            Text(text = item.newsModel.data[index].title, fontSize = 25.sp)
+                            Text(text = list[index].title!!, fontSize = 25.sp)
+                           // Text(text = item.newsModel.data[index].title, fontSize = 25.sp)
                         }
                     }
                 }

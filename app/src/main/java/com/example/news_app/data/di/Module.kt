@@ -82,7 +82,9 @@ class Module {
         context,
         NewsDatabase::class.java,
         "NewsDatabase",
-    ).build()
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Provides
     fun provideDao(database: NewsDatabase) = database.newsDao()

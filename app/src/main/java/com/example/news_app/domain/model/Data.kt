@@ -1,6 +1,7 @@
 package com.example.news_app.domain.model
 
 
+import com.example.news_app.data.local.NewsEntity
 import com.google.gson.annotations.SerializedName
 
 data class Data(
@@ -23,3 +24,19 @@ data class Data(
     @SerializedName("url")
     val url: String = ""
 )
+
+/**
+ Added to facilitate storing data to db
+ */
+fun Data.toNewsEntity(): NewsEntity {
+    return NewsEntity(
+        author = author,
+        content = content,
+        date = date,
+        imageUrl = imageUrl,
+        readMoreUrl = readMoreUrl?:"",
+        time = time,
+        title = title,
+        url = url
+    )
+}
