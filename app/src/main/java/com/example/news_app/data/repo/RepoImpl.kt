@@ -16,8 +16,9 @@ class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val lo
         emit(Resource.Loading())
         readNewsFromDB().collect() { lists ->
             if (lists.isEmpty()) {
-                val response = fetchDataFromRemote(remote,category)
+                val response = fetchDataFromRemote(remote, category)
                 if (response is Resource.Success) {
+                    nukeTable()
                     insertNewsToDB(NewsEntity(response.data!!))
                     readNewsFromDB().collect() {
                         emit(Resource.Success(it))
@@ -42,5 +43,7 @@ class RepoImpl @Inject constructor(val remote: RemoteDataSourceInterface, val lo
     override fun nukeTable() {
         return local.nukeTable()
     }
-    override suspend fun fetchDataFromRemote(remote: RemoteDataSourceInterface, category:String)= remote.getNews(category)
+
+    override suspend fun fetchDataFromRemote(remote: RemoteDataSourceInterface, category: String) =
+        remote.getNews(category)
 }
