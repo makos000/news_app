@@ -9,7 +9,7 @@ interface RepoInterface {
 
     fun insertNewsToDB(newsEntity: NewsEntity)
 
-    fun readNewsToDB(): Flow<List<NewsEntity>>
+    fun readNewsFromDB(): Flow<List<NewsEntity>>
 
     fun nukeTable()
 }
