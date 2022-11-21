@@ -5,21 +5,21 @@ import com.google.gson.annotations.SerializedName
 
 data class Data(
     @SerializedName("author")
-    val author: String,
+    val author: String = "",
     @SerializedName("content")
-    val content: String,
+    val content: String = "",
     @SerializedName("date")
-    val date: String,
+    val date: String = "",
     @SerializedName("id")
-    val id: String,
+    val id: String = "",
     @SerializedName("imageUrl")
-    val imageUrl: String,
+    val imageUrl: String = "",
     @SerializedName("readMoreUrl")
-    val readMoreUrl: String,
+    val readMoreUrl: String = "",
     @SerializedName("time")
-    val time: String,
+    val time: String = "",
     @SerializedName("title")
-    val title: String,
+    val title: String = "",
     @SerializedName("url")
-    val url: String
+    val url: String = ""
 )

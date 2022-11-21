@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.news_app.data.local.NewsEntity
 import com.example.news_app.data.repo.RepoInterface
+import com.example.news_app.domain.model.Data
 import com.example.news_app.domain.model.NewsModel
 import com.example.news_app.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,9 @@ class MainViewModel @Inject constructor(val repository: RepoInterface): ViewMode
     private var _data: MutableStateFlow<Resource<List<NewsEntity>>> = MutableStateFlow(Resource.Loading())
     var data: StateFlow<Resource<List<NewsEntity>>> = _data
 
-    var article = NewsModel()
+    var newsScreen = true
+
+    var article = Data()
 
     fun getData(category: String){
         viewModelScope.launch(Dispatchers.IO) {

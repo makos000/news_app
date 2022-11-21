@@ -34,7 +34,7 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
                 itemsIndexed(items = list){
                     index, item ->
                     Card(onClick = {onClicked.invoke()
-                        viewModel.article = item.newsModel
+                        viewModel.article = item.newsModel.data[index]
                     },
                         modifier = Modifier
                         .fillMaxWidth()
