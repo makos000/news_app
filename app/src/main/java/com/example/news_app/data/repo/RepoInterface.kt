@@ -11,5 +11,6 @@ interface RepoInterface {
 
     fun readNewsToDB(): Flow<List<NewsEntity>>
 
+    //test
     fun nukeTable()
 }
