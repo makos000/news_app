@@ -1,5 +1,6 @@
 package com.example.news_app.data.remote.api
 
+import com.example.news_app.domain.model.Data
 import com.example.news_app.domain.model.NewsModel
 import retrofit2.Response
 import retrofit2.http.GET
