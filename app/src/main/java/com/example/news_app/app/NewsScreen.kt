@@ -16,13 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.news_app.R
 
 //Upgrade here
 
@@ -41,14 +39,11 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
                 Text(text = "There is nothing to display...")
             }
         }else{
-            LazyColumn(){
+            LazyColumn {
                 itemsIndexed(items = list){
                     index, item ->
                     Card(onClick = {onClicked.invoke()
-
                         viewModel.article = list.map { it.toDataModel()}[index]
-                       // viewModel.article = list.map { it.toData()}[index]
-                        //viewModel.article = item.newsModel.data[index]
                     },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -57,7 +52,7 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
                         elevation = 0.dp,
                         shape = RoundedCornerShape(0.dp)
                     ) {
-                        Column() {
+                        Column {
                             Row(Modifier.padding(top = 10.dp)) {
                                 Card(Modifier
                                     .fillMaxWidth(),
@@ -80,11 +75,11 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
                                 Box(Modifier
                                     .fillMaxWidth(), contentAlignment = Alignment.CenterStart
                                 ) {
-                                    Column() {
+                                    Column {
                                         Text(text = list[index].author + " • " + list[index].date, fontSize = 16.sp, color = Color.Gray)
                                     }
                                     Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()) {
-                                        IconButton(onClick = onClicked,) {
+                                        IconButton(onClick = onClicked) {
                                             Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "Favourite Button")
                                         }
                                     }
