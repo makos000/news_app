@@ -1,13 +1,11 @@
-package com.example.news_app.app
+package com.example.news_app.app.news
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.news_app.app.SETTINGS_SCREEN
 import com.example.news_app.data.local.NewsEntity
 import com.example.news_app.data.repo.RepoInterface
-import com.example.news_app.domain.model.Data
 import com.example.news_app.domain.model.DataModel
-import com.example.news_app.domain.model.NewsModel
-import com.example.news_app.domain.model.toNewsEntity
 import com.example.news_app.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -38,4 +36,7 @@ class MainViewModel @Inject constructor(
             }
         }
     }
+
+    fun onSettingsClick(openScreen: (String) -> Unit) = openScreen(SETTINGS_SCREEN)
+
 }
