@@ -81,7 +81,7 @@ fun NewsApp() {
                     modifier = Modifier.padding(innerPaddingModifier)
 
                 ) {
-                    makeItSoGraph(appState)
+                    navGraph(appState)
                 }
             }
 }
@@ -106,19 +106,19 @@ fun resources(): Resources {
 }
 
 @ExperimentalMaterialApi
-fun NavGraphBuilder.makeItSoGraph(appState: AppState) {
+fun NavGraphBuilder.navGraph(appState: AppState) {
 
     composable(SPLASH_SCREEN) {
         SplashScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
     }
-
+/*
     composable(SETTINGS_SCREEN) {
         SettingsScreen(
             restartApp = { route -> appState.clearAndNavigate(route) },
             openScreen = { route -> appState.navigate(route) }
         )
     }
-
+*/
     composable(LOGIN_SCREEN) {
         LoginScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
     }
@@ -146,7 +146,11 @@ fun NavGraphBuilder.makeItSoGraph(appState: AppState) {
     composable("details") {
 
     }
-    composable("settings") {
+    composable(SETTINGS_SCREEN) {
 
+        SettingsScreen(
+            restartApp = { route -> appState.clearAndNavigate(route) },
+            openScreen = { route -> appState.navigate(route) }
+        )
     }
 }

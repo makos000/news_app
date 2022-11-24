@@ -1,5 +1,6 @@
 package com.example.news_app.app.news
 
+import android.media.tv.TvContract.Programs.Genres.NEWS
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -20,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.news_app.R
+import com.example.news_app.app.authentication.common.composable.ActionToolbar
+import com.example.news_app.app.authentication.common.composable.BasicToolbar
 import com.example.news_app.app.authentication.common.ext.smallSpacer
 import com.example.news_app.app.authentication.common.ext.toolbarActions
 
@@ -39,13 +42,8 @@ fun NewsScreen(
     val list = viewModel.data.collectAsState().value.data
 Column() {
 
-    ActionToolbar(
-        title = R.string.news,
-        modifier = Modifier.toolbarActions(),
-        // endActionIcon = AppIcon.ic_settings,
-        endActionIcon = R.drawable.ic_settings,
-        endAction = { viewModel.onSettingsClick(openScreen) }
-    )
+    BasicToolbar(R.string.news)
+
     Spacer(modifier = Modifier.smallSpacer())
 
     if (list != null){
@@ -82,31 +80,6 @@ Column() {
 
 }
 
-
-
 }
 
-@Composable
-fun ActionToolbar(
-    @StringRes title: Int,
-    @DrawableRes endActionIcon: Int,
-    modifier: Modifier,
-    endAction: () -> Unit
-) {
-    TopAppBar(
-        title = { Text(stringResource(title)) },
-        backgroundColor = toolbarColor(),
-        actions = {
-            Box(modifier) {
-                IconButton(onClick = endAction) {
-                    Icon(painter = painterResource(endActionIcon), contentDescription = "Action")
-                }
-            }
-        }
-    )
-}
 
-@Composable
-private fun toolbarColor(darkTheme: Boolean = isSystemInDarkTheme()): Color {
-    return if (darkTheme) MaterialTheme.colors.secondary else MaterialTheme.colors.primaryVariant
-}
