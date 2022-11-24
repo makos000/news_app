@@ -62,16 +62,5 @@ class LoginViewModel @Inject constructor(
             SnackbarManager.showMessage(AppText.recovery_email_sent)
         }
     }
-
-//    fun launchCatching(snackbar: Boolean = true, block: suspend CoroutineScope.() -> Unit) =
-//        viewModelScope.launch(
-//            CoroutineExceptionHandler { _, throwable ->
-//                if (snackbar) {
-//                    SnackbarManager.showMessage(throwable.toSnackbarMessage())
-//                }
-//                logService.logNonFatalCrash(throwable)
-//            },
-//            block = block
-//        )
 }
 

@@ -16,7 +16,6 @@ limitations under the License.
 
 package com.example.news_app.app.authentication.settings
 
-import com.example.makeitso.screens.settings.SettingsUiState
 import com.example.news_app.app.LOGIN_SCREEN
 import com.example.news_app.app.AppViewModel
 import com.example.news_app.app.SIGN_UP_SCREEN
@@ -31,7 +30,6 @@ import kotlinx.coroutines.flow.map
 class SettingsViewModel @Inject constructor(
   logService: LogService,
   private val accountService: AccountService
-//  private val storageService: StorageService
 ) : AppViewModel(logService) {
   val uiState = accountService.currentUser.map { SettingsUiState(it.isAnonymous) }
 
@@ -48,7 +46,6 @@ class SettingsViewModel @Inject constructor(
 
   fun onDeleteMyAccountClick(restartApp: (String) -> Unit) {
     launchCatching {
-//      storageService.deleteAllForUser(accountService.currentUserId)
       accountService.deleteAccount()
       restartApp(SPLASH_SCREEN)
     }

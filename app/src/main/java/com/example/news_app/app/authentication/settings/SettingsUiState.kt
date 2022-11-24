@@ -14,6 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.example.makeitso.screens.settings
+package com.example.news_app.app.authentication.settings
 
 data class SettingsUiState(val isAnonymousAccount: Boolean = true)
