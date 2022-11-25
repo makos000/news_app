@@ -2,7 +2,6 @@ package com.example.authexample.presentation.loginscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.authexample.firebaseauthrepo.data.AuthRepository
 import com.example.authexample.presentation.loginscreen.SignInState
 import com.example.authexample.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
