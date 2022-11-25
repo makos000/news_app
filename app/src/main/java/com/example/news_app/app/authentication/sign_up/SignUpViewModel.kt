@@ -25,7 +25,7 @@ import com.example.news_app.app.authentication.common.ext.isValidPassword
 import com.example.news_app.app.authentication.common.ext.passwordMatches
 import com.example.news_app.app.authentication.common.snackbar.SnackbarManager
 import com.example.news_app.data.firebaseauth.AccountService
-import com.example.news_app.data.firebaseauth.LogService
+//import com.example.news_app.data.firebaseauth.LogService
 import com.example.news_app.R.string as AppText
 
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,9 +33,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-  private val accountService: AccountService,
-  logService: LogService
-) : AppViewModel(logService) {
+  private val accountService: AccountService
+) : AppViewModel() {
   var uiState = mutableStateOf(SignUpUiState())
     private set
 

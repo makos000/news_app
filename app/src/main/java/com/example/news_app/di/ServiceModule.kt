@@ -15,19 +15,19 @@ limitations under the License.
  */
 
 package com.example.news_app.di
-import com.example.news_app.data.firebaseauth.impl.AccountServiceImpl
-import com.example.news_app.data.firebaseauth.impl.LogServiceImpl
-import com.example.news_app.data.firebaseauth.AccountService
-import com.example.news_app.data.firebaseauth.LogService
-import dagger.Binds
+//import com.example.news_app.data.firebaseauth.impl.AccountServiceImpl
+//import com.example.news_app.data.firebaseauth.impl.LogServiceImpl
+//import com.example.news_app.data.firebaseauth.AccountService
+//import com.example.news_app.data.firebaseauth.LogService
+//import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class ServiceModule {
-  @Binds abstract fun provideAccountService(impl: AccountServiceImpl): AccountService
-
-  @Binds abstract fun provideLogService(impl: LogServiceImpl): LogService
-}
+//@Module
+//@InstallIn(SingletonComponent::class)
+//abstract class ServiceModule {
+//  @Binds abstract fun provideAccountService(impl: AccountServiceImpl): AccountService
+//
+// // @Binds abstract fun provideLogService(impl: LogServiceImpl): LogService
+//}

@@ -1,23 +1,22 @@
 package com.example.news_app.app.authentication.login
 
 import androidx.compose.runtime.mutableStateOf
-import com.example.news_app.app.LOGIN_SCREEN
 import com.example.news_app.app.AppViewModel
+import com.example.news_app.app.LOGIN_SCREEN
 import com.example.news_app.app.SETTINGS_SCREEN
 import com.example.news_app.R.string as AppText
 import com.example.news_app.app.authentication.common.ext.isValidEmail
 import com.example.news_app.app.authentication.common.snackbar.SnackbarManager
 import com.example.news_app.data.firebaseauth.AccountService
-import com.example.news_app.data.firebaseauth.LogService
+//import com.example.news_app.data.firebaseauth.LogService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val accountService: AccountService,
-    private val logService: LogService
-) : AppViewModel(logService) {
+    private val accountService: AccountService
+) : AppViewModel() {
     var uiState = mutableStateOf(LoginUiState())
         private set
 

@@ -16,21 +16,20 @@ limitations under the License.
 
 package com.example.news_app.app.authentication.settings
 
-import com.example.news_app.app.LOGIN_SCREEN
 import com.example.news_app.app.AppViewModel
+import com.example.news_app.app.LOGIN_SCREEN
 import com.example.news_app.app.SIGN_UP_SCREEN
 import com.example.news_app.app.SPLASH_SCREEN
 import com.example.news_app.data.firebaseauth.AccountService
-import com.example.news_app.data.firebaseauth.LogService
+//import com.example.news_app.data.firebaseauth.LogService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.map
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-  logService: LogService,
   private val accountService: AccountService
-) : AppViewModel(logService) {
+) : AppViewModel() {
   val uiState = accountService.currentUser.map { SettingsUiState(it.isAnonymous) }
 
   fun onLoginClick(openScreen: (String) -> Unit) = openScreen(LOGIN_SCREEN)

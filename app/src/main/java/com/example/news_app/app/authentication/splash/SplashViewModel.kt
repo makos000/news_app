@@ -21,16 +21,15 @@ import com.example.news_app.app.AppViewModel
 import com.example.news_app.app.NEWS_SCREEN
 import com.example.news_app.app.SPLASH_SCREEN
 import com.example.news_app.data.firebaseauth.AccountService
-import com.example.news_app.data.firebaseauth.LogService
+//import com.example.news_app.data.firebaseauth.LogService
 import com.google.firebase.auth.FirebaseAuthException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-  private val accountService: AccountService,
-  logService: LogService
-) : AppViewModel(logService) {
+  private val accountService: AccountService
+) : AppViewModel() {
   val showError = mutableStateOf(false)
 
   fun onAppStart(openAndPopUp: (String, String) -> Unit) {
