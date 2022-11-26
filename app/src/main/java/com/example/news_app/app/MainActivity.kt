@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,6 +23,8 @@ import com.example.news_app.app.authentication.login.LoginScreen
 import com.example.news_app.app.authentication.sign_up.SignUpScreen
 import com.example.news_app.app.navbar.BottomNavItem
 import com.example.news_app.app.navbar.BottomNavigationBar
+import com.example.news_app.app.navbar.LOGIN_SCREEN
+import com.example.news_app.app.navbar.SIGN_UP_SCREEN
 import com.example.news_app.app.news.DetailScreen
 import com.example.news_app.app.news.MainViewModel
 import com.example.news_app.app.news.NewsScreen
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
                                     icon = Icons.Default.Email,
                                 ),
                                 BottomNavItem(
-                                    name = "SigIn ",
+                                    name = "SignIn ",
                                     route = "login",
                                     icon = Icons.Default.AccountBox,
                                 )

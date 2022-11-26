@@ -35,7 +35,7 @@ fun LoginScreen(
     val userState by viewModel.userState.collectAsState(initial = UserState(false))
 
 
-   // BasicToolbar(AppText.login_details)
+    BasicToolbar(AppText.login_details)
 
     Column(
         modifier = modifier

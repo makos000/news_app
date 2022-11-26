@@ -1,11 +1,10 @@
 package com.example.news_app.app.authentication.login
 
-//import com.example.news_app.data.firebaseauth.LogService
 import androidx.compose.runtime.mutableStateOf
 import com.example.news_app.app.AppViewModel
-import com.example.news_app.app.LOGIN_SCREEN
-import com.example.news_app.app.NEWS_SCREEN
-import com.example.news_app.app.SIGN_UP_SCREEN
+import com.example.news_app.app.navbar.LOGIN_SCREEN
+import com.example.news_app.app.navbar.NEWS_SCREEN
+import com.example.news_app.app.navbar.SIGN_UP_SCREEN
 import com.example.news_app.app.authentication.common.ext.isValidEmail
 import com.example.news_app.app.authentication.common.snackbar.SnackbarManager
 import com.example.news_app.data.firebaseauth.AccountService
@@ -51,7 +50,6 @@ class LoginViewModel @Inject constructor(
 
         launchCatching {
             accountService.authenticate(email, password)
-            //openAndPopUp(SETTINGS_SCREEN, LOGIN_SCREEN)
             openAndPopUp(NEWS_SCREEN, LOGIN_SCREEN)
         }
     }
@@ -69,7 +67,10 @@ class LoginViewModel @Inject constructor(
     }
 
 
-    fun onSignUpClick(openAndPopUp: (String, String) -> Unit)= openAndPopUp(SIGN_UP_SCREEN,LOGIN_SCREEN)
+    fun onSignUpClick(openAndPopUp: (String, String) -> Unit)= openAndPopUp(
+        SIGN_UP_SCREEN,
+        LOGIN_SCREEN
+    )
 
     fun onSignOutClick(openAndPopUp: (String, String) -> Unit) {
         launchCatching {
