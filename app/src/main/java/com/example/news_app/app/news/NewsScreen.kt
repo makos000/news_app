@@ -1,4 +1,5 @@
-package com.example.news_app.app
+package com.example.news_app.app.news
+
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -7,7 +8,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,12 +21,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+//import com.example.news_app.app.MainViewModel
 
 //Upgrade here
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
+fun NewsScreen(viewModel: MainViewModel,
+                onClicked: () -> Unit
+) {
     LaunchedEffect(key1 = true){
         viewModel.getData("science")
     }
@@ -41,7 +44,7 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
         }else{
             LazyColumn {
                 itemsIndexed(items = list){
-                    index, item ->
+                        index, item ->
                     Card(onClick = {onClicked.invoke()
                         viewModel.article = list.map { it.toDataModel()}[index]
                     },
