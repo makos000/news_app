@@ -20,6 +20,7 @@ class LoginViewModel @Inject constructor(
 ) : AppViewModel() {
     var uiState = mutableStateOf(LoginUiState())
         private set
+    //private set==viewModel only set this value
 
     private val email
         get() = uiState.value.email

@@ -71,6 +71,15 @@ fun LoginScreen(
             ) {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
+                        painter = painterResource(id = R.drawable.ic_twiiter),
+                        contentDescription = "Twitter Icon",
+                        modifier = Modifier.size(50.dp),
+                        tint = Color.Unspecified
+                    )
+                }
+                Spacer(modifier = Modifier.width(20.dp))
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_google),
                         contentDescription = "Google Icon",
                         modifier = Modifier.size(50.dp),

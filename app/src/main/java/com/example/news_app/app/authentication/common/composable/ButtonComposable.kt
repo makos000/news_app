@@ -26,7 +26,7 @@ fun BasicButton(@StringRes text: Int,
     modifier = modifier,
     colors =
       ButtonDefaults.buttonColors(
-        backgroundColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.onBackground,
         contentColor = MaterialTheme.colors.onPrimary
       )
   ) {
