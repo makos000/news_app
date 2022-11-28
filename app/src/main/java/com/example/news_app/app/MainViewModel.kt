@@ -11,8 +11,10 @@ import com.example.news_app.domain.model.toNewsEntity
 import com.example.news_app.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,8 +29,8 @@ class MainViewModel @Inject constructor(
     var newsScreen = true
 
 
-    var article=DataModel()
-   // var article = Data().toNewsEntity()
+    var article = DataModel()
+    // var article = Data().toNewsEntity()
     // var article = Data()
 
     fun getData(category: String) {
@@ -36,6 +38,21 @@ class MainViewModel @Inject constructor(
             repository.getNews(category).collect() {
                 _data.value = it
             }
+        }
+    }
+
+    private val _isLoading = MutableStateFlow(false)
+    val isloading = _isLoading.asStateFlow()
+
+    init {
+        loadStuff()
+    }
+
+    fun loadStuff() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            delay(3000L)
+            _isLoading.value = false
         }
     }
 }
