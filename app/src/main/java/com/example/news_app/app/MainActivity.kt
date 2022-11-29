@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +29,7 @@ import com.example.news_app.app.navbar.SIGN_UP_SCREEN
 import com.example.news_app.app.news.DetailScreen
 import com.example.news_app.app.news.MainViewModel
 import com.example.news_app.app.news.NewsScreen
+import com.example.news_app.app.preferences.PreferencesScreen
 import com.example.news_app.app.theme.News_appTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,9 +55,9 @@ class MainActivity : ComponentActivity() {
                                     icon = Icons.Default.Home
                                 ),
                                 BottomNavItem(
-                                    name = "Details",
-                                    route = "details",
-                                    icon = Icons.Default.Email,
+                                    name = "Preferences",
+                                    route = "preferences",
+                                    icon = Icons.Default.Settings,
                                 ),
                                 BottomNavItem(
                                     name = "SignIn ",
@@ -95,7 +97,12 @@ class MainActivity : ComponentActivity() {
                     })
                 }
             }
-            composable("details") {
+            composable("preferences") {
+                PreferencesScreen(openAndPopUp = { route, popUp ->
+                    navController.navigate(route) {
+                        launchSingleTop = true
+                        popUpTo(popUp) { inclusive = true }
+                    } })
             }
             composable(route = LOGIN_SCREEN) {
                 LoginScreen(openAndPopUp = { route, popUp ->

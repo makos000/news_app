@@ -23,6 +23,7 @@ class MainViewModel @Inject constructor(
 
     var newsScreen = true
 
+    var categories = mutableListOf<String>("science")
 
     var article=DataModel()
    // var article = Data().toNewsEntity()
