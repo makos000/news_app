@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
                     navController.navigate(route) {
                         launchSingleTop = true
                         popUpTo(popUp) { inclusive = true }
-                    } })
+                    } }, viewModel)
             }
             composable(route = LOGIN_SCREEN) {
                 LoginScreen(openAndPopUp = { route, popUp ->
