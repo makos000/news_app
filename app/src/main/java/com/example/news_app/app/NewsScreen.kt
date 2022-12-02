@@ -7,12 +7,11 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,8 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 //Upgrade here
 
@@ -35,21 +34,28 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
     }
 
     val list = viewModel.data.collectAsState().value.data
-    val isLoading by viewModel.isloading.collectAsState()
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isLoading)
+
+
+    val refreshScope = rememberCoroutineScope()
+    var refreshing by remember { mutableStateOf(false) }
+
+
+    fun refresh() = refreshScope.launch {
+        refreshing = true
+            viewModel.getData("science")
+            delay(3000)
+            refreshing = false
+        }
+
+    val state = rememberPullRefreshState(refreshing, ::refresh)
 
     if (list != null) {
         if (list.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = "There is nothing to display...")
+                Text(text = "Loading...")
             }
         } else {
-
-            SwipeRefresh(
-                state = swipeRefreshState,
-                onRefresh = viewModel::loadStuff
-            ) {
-
+            Box(Modifier.pullRefresh(state)) {
                 LazyColumn {
                     itemsIndexed(items = list) { index, item ->
                         Card(
@@ -129,6 +135,7 @@ fun NewsScreen(viewModel: MainViewModel, onClicked: () -> Unit) {
                         )
                     }
                 }
+                PullRefreshIndicator(refreshing, state, Modifier.align(Alignment.TopCenter))
             }
         }
     }
